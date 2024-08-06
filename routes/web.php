@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', function () {
-    return view('welcome');
+Route::get('/master_data/food_menu', function () {
+    return view('FoodMenu.index');
 });
 Route::get('/',function(){
     return view('view');
