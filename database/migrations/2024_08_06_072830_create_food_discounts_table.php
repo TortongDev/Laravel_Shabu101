@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('food_discounts', function (Blueprint $table) {
             $table->id();
+            $table->integer('menu_food_id');
+            $table->integer('discount_persent');
+            $table->string('date_form');
+            $table->string('date_to');
             $table->timestamps();
         });
     }
