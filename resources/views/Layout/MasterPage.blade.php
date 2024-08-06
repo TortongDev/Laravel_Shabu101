@@ -10,6 +10,8 @@
         <li><a href="">Food Type</a></li>
         <li><a href="">Food Discount</a></li>
         <li><a href="">Help</a></li>
-
     </ul>
 </nav>
+<section class="wrapper">
+    @yield('App')
+</section>
