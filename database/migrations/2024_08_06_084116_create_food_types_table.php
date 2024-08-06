@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('food_discounts', function (Blueprint $table) {
+        Schema::create('food_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('menu_food_id');
-            $table->integer('food_type_id');
-            $table->integer('discount_persent');
-            $table->string('date_form');
-            $table->string('date_to');
+            $table->string('foot_type_name',40);
+            $table->string('foot_type',80);
+            $table->char('foot_type_status',1)->default(1);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('food_discounts');
+        Schema::dropIfExists('food_types');
     }
 };
