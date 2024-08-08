@@ -8,13 +8,26 @@
             <h6>Master Data > Foods Menu</h6>
         </div>
     </div>
+    @if (!empty(session('InSuccess')))
+        <div class="alert alert-success">
+            <strong>Success!</strong> {{ session('InSuccess') }}
+        </div>
+    @endif
+    @if (!empty(session('InError')))
+        <div class="alert alert-warning">
+            <strong>Error!</strong> {{ session('InError') }}
+        </div>
+    @endif
+
+
+
     <div class="card mt-2">
         <div class="card-header">
             ฟอร์มบันทึกข้อมูล
         </div>
         <div class="card-body">
             <div class="row">
-               <form action="" method="post">
+               <form action="{{route('master_data.insert.food_menu')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-10">
                         <div class="form-group mb-3">
@@ -26,17 +39,17 @@
                             <textarea cols="5" rows="10" name="menu_food_desc" id="menu_food_desc" class="form-control"></textarea>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="menu_food_price">ชื่อเมนู</label><br />
+                            <label for="menu_food_price">ราคา / หน่วย</label><br />
                             <input type="number" name="menu_food_price" id="menu_food_price" class="form-control">
                         </div>
                         <div class="form-group mb-3">
                             <label for="menu_food_status">สถานะใช้งาน</label><br />
-                            <input type="radio" name="active" id="active" value="Y"/> <label for="active">Active</label>
-                            <input type="radio" name="inactive" id="inactive" value="N" /> <label for="inactive">InActive</label>
+                            <input type="radio" name="menu_food_status" id="active" value="Y"/> <label for="active">Active</label>
+                            <input type="radio" name="menu_food_status" id="inactive" value="N" /> <label for="inactive">InActive</label>
                         </div>
                         <div class="form-group mb-3">
                             <label for="picture">แนบรูปภาพ</label><br />
-                            <input type="text" name="picture" id="picture" class="form-control">
+                            <input type="file" name="picture" id="picture" class="form-control">
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
