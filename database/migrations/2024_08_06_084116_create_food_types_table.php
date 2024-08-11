@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('food_types', function (Blueprint $table) {
             $table->id();
-            $table->string('foot_type_name',40);
-            $table->string('foot_type',80);
-            $table->char('foot_type_status',1)->default(1);
+            $table->string('food_type_name',40);
+            $table->char('food_type_status',1)->default(1);
             $table->timestamps();
         });
     }

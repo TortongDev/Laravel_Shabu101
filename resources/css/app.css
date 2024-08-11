@@ -39,3 +39,6 @@ section.wrapper {
     padding-inline: 40px;
     margin-top: 20px;
 }
+#setTime {
+    display: block;
+}

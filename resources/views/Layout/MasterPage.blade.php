@@ -1,4 +1,4 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/css/app.css', 'resources/js/app.js','resources/js/setTime.js'])
 
 <header>
     <div class="header-title">
@@ -7,10 +7,10 @@
 </header>
 <nav>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/master_data/food_menu">Food Menu</a></li>
-        <li><a href="">Food Type</a></li>
-        <li><a href="">Food Discount</a></li>
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/master_data/form/food_menu">เพิ่มเมนู</a></li>
+        <li><a href="/master_data/form/food_type">เพิ่มประเภทของเมนู</a></li>
+        <li><a href="">ตั้งค่าส่วนลด</a></li>
         <li><a href="">Help</a></li>
     </ul>
 </nav>

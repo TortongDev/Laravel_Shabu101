@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class FoodMenuController extends Controller
 {
     public function index(){
-        return view('FoodMenu.index');
+        $list = $this->list();
+        // redirect()->route('mater_data.food_menu',compact('food_list_item'))
+        return view('FoodMenu.index',['list'=>$list]);
     }
     public function insert(Request $request){
         try {
@@ -41,7 +43,52 @@ class FoodMenuController extends Controller
         $find = FoodMenu::query();
         $find = $find->where('id',$id)->get();
         return view('FoodMenu.Edit',['response'=>$find->toArray(0)]);
+    }
+    public function list(){
+        $food_list = FoodMenu::query()->orderBy('id','desc')->get();
+        return $food_list->toArray();
+    }
+    public function update(Request $request,$id){
+        try {
+            $update = FoodMenu::find($id);
+            if($request->hasFile('picture')){
+                $request->validate([
+                    'menu_food_name' => 'required',
+                    'menu_food_desc' => 'required',
+                    'menu_food_price' => 'required',
+                    'picture'        => 'required',
+                    'menu_food_status' => 'required'
+                ]);
+                $filename = $request->file('picture');
+                $imageNameCreate = time().'_'.$filename->getClientOriginalName();
+                $filename->storeAs('uploads',$imageNameCreate,'public');
+                $update->update([
+                    'menu_food_name' => $request->input('menu_food_name'),
+                    'menu_food_desc' => $request->input('menu_food_desc'),
+                    'menu_food_price' => $request->input('menu_food_price'),
+                    'picture'        => $imageNameCreate,
+                    'menu_food_status' => $request->input('menu_food_status')
+                ]);
+            }else{
+                $request->validate([
+                    'menu_food_name' => 'required',
+                    'menu_food_desc' => 'required',
+                    'menu_food_price' => 'required',
+                    'menu_food_status' => 'required'
+                ]);
 
+                $update->update([
+                    'menu_food_name' => $request->input('menu_food_name'),
+                    'menu_food_desc' => $request->input('menu_food_desc'),
+                    'menu_food_price' => $request->input('menu_food_price'),
+                    'menu_food_status' => $request->input('menu_food_status')
+                ]);
+            }
+            return redirect()->route('mater_data.food_menu')->with('InSuccess','update Successfully.');
+        } catch (Exception $err) {
 
+            return redirect()->route('mater_data.food_menu')->with('InError',$err->getMessage());
+
+        }
     }
 }

@@ -6,11 +6,11 @@
     </div>
     <div class="card-body">
         <div class="row">
-           <form action="{{route('master_data.insert.food_menu')}}" method="post" enctype="multipart/form-data">
+
+            @foreach ($response as $item)
+           <form action="{{route('master_data.update.food_menu',$item['id'])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
-                    @foreach ($response as $item)
-
                     <div class="col-md-10">
                         <div class="form-group mb-3">
                             <label for="menu_food_name">ชื่อเมนู</label><br />
@@ -36,19 +36,24 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="picture">แนบรูปภาพ</label><br />
-                            <input type="file" name="picture" id="picture" class="form-control">
+                            <input type="hidden" id="picture_path">
+                            <input type="file" name="picture" id="picture" value="{{ $item['picture'] }}"class="form-control">
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
                             <button type="reset" class="btn btn-warning">ล้างฟอร์ม</button>
                         </div>
                     </div>
-                @endforeach
-
             </form>
+            @endforeach
         </div>
 
     </div>
 </div>
+<script>
+    let picture = document.querySelector('#picture')
+    console.log(picture.files);
 
+</script>
 @endsection
+
