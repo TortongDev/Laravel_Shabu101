@@ -75,4 +75,8 @@ class FoodTypeController extends Controller
         $request->session()->put('data_tem',$temporary);
         return redirect()->back();
     }
+    public function edit($id){
+        $fetch = FoodType::query()->where('id',$id)->get();
+        return view('FoodType.Edit', ['fetchArr' => $fetch->toArray()]);
+    }
 }

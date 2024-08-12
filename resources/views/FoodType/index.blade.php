@@ -36,10 +36,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $j = 1;
-                        @endphp
-                        @foreach (session('data_tem',[]) as $i => $temporaty)
+
+                       @if (!empty(session('data_tem')))
+                            @php
+                                $j = 1;
+                            @endphp
+                            @foreach (session('data_tem',[]) as $i => $temporaty)
                             <tr>
                                 <td>{{$j++}}</td>
                                 <td>{{$temporaty['food_type_name']}}</td>
@@ -49,19 +51,27 @@
                                 </td>
 
                             </tr>
-                        @endforeach
+                            @endforeach
+                       @else
+                            <tr>
+                                <td colspan="4" class="text-center"> - ไม่พบข้อมูล - </td>
+                            </tr>
+                       @endif
                     </tbody>
                 </table>
 
             </div>
-            <div class="row mt-2">
-                <div class="col-md-12">
-                    <form method="post" action="{{route('master_data.insert.food_type')}}">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">บันทึกลงฐานข้อมูล</button>
-                    </form>
+            @if (!empty(session('data_tem')))
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <form method="post" action="{{route('master_data.insert.food_type')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">บันทึกลงฐานข้อมูล</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endif
+
         </div>
         </div>
     </div>
@@ -119,7 +129,7 @@
                             <td>{{$item['food_type_name']}}</td>
                             <td>{{$item['food_type_status']}}</td>
                             <td>
-                                <a href="" class="btn btn-warning">แก้ไขข้อมูล</a>
+                                <a href="{{route('mater_data.edit.food_type',$item['id'])}}" class="btn btn-warning">แก้ไขข้อมูล</a>
                                 <form action="{{route('master_data.delete.food_type',$item['id'])}}" method="post">
                                     @csrf
                                     @method('delete')

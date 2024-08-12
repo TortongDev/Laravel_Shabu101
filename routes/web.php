@@ -22,3 +22,4 @@ Route::post('/master_data/post/food_type',[FoodTypeController::class, 'insert'])
 Route::delete('/master_data/delete/food_type/{id}',[FoodTypeController::class, 'delete'])->name('master_data.delete.food_type');
 Route::post('/master_data/addTemporary/food_type',[FoodTypeController::class, 'addLocalStorage'])->name('master_data.addTemporary.food_type');
 Route::get('/master_data/removeLocalStorage/food_type/{id}',[FoodTypeController::class, 'removeLocalStorage'])->name('mater_data.removeLocalStorage');
+Route::get('/master_data/edit/food_type/{id}',[FoodTypeController::class, 'edit'])->name('mater_data.edit.food_type');

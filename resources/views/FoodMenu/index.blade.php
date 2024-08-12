@@ -47,6 +47,15 @@
                             <input type="radio" name="menu_food_status" id="active" value="Y"/> <label for="active">Active</label>
                             <input type="radio" name="menu_food_status" id="inactive" value="N" /> <label for="inactive">InActive</label>
                         </div>
+                        <div class="form-group mt-3">
+                            <label for="menu_food_category">ประเภท</label><br />
+                            <select name="menu_food_category" id="menu_food_category" class="form-control" readonly>
+                                <option value=""> --เลือกข้อมูล-- </option>
+                                @foreach($listType as $value)
+                                    <option value="{{ $value['id'] }}">{{ $value['food_type_name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group mb-3">
                             <label for="picture">แนบรูปภาพ</label><br />
                             <input type="file" name="picture" id="picture" class="form-control">

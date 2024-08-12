@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FoodMenu;
+use App\Models\FoodType;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,9 @@ class FoodMenuController extends Controller
 {
     public function index(){
         $list = $this->list();
+        $listType = $this->listType();
         // redirect()->route('mater_data.food_menu',compact('food_list_item'))
-        return view('FoodMenu.index',['list'=>$list]);
+        return view('FoodMenu.index',['list'=>$list,'listType' =>  $listType]);
     }
     public function insert(Request $request){
         try {
@@ -47,6 +49,10 @@ class FoodMenuController extends Controller
     public function list(){
         $food_list = FoodMenu::query()->orderBy('id','desc')->get();
         return $food_list->toArray();
+    }
+    public function listType(){
+        $listType = FoodType::query();
+        return $listType->get()->toArray();
     }
     public function update(Request $request,$id){
         try {

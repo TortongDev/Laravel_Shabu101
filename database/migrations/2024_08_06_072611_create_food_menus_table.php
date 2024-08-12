@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('menu_food_price')->default(0);
             $table->string('picture',300);
             $table->char('menu_food_status',1);
+            $table->string('menu_food_category',10);
             $table->timestamps();
         });
     }
